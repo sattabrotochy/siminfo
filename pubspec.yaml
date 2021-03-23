@@ -30,19 +30,20 @@ dependencies:
   cupertino_icons: ^1.0.2
   carousel_pro:
   curved_navigation_bar:
-  fluttertoast:
+  toast:
   url_launcher:
   clipboard:
-  flutter_share:
   share:
   cloud_firestore:
   firebase_core:
   firebase_auth:
   firebase_storage:
   firebase_database:
+  flutter_launcher_icons:
   google_fonts:
   flutter_statusbarcolor:
   provider: ^4.3.3
+  connectivity:
 
 
 
@@ -50,6 +51,10 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "asset/allsimbdicon.png"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -70,7 +75,7 @@ flutter:
     - asset/robi.png
     - asset/gp.png
     - asset/banglalink.png
-    - asset/telitok.png
+    - asset/teletalk.png
     - asset/offer.jpg
     - asset/home_back.jpg
     - asset/home_back2.jpg
@@ -81,8 +86,9 @@ flutter:
     - asset/gp_slider.jpg
     - asset/airtel_slider.jpg
     - asset/surprise.png
-    - asset/teletalk_icon.jpeg
-    - asset/teletalk_icon_p.png
+    - asset/drawer_image.png
+
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

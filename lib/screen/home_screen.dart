@@ -243,7 +243,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       SizedBox(width: 20,),
                       ButtonDesgin(
                           name: 'teletalk ',
-                          image: 'asset/teletalk_icon_p.png',
+                          image: 'asset/teletalk.png',
                           onTap: 'teletalk'),
                     ],
                   ),

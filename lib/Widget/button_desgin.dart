@@ -1,6 +1,8 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:siminfoall/screen/airtel_screen.dart';
 import 'package:siminfoall/screen/robi_screen.dart';
+import 'package:toast/toast.dart';
 import '../screen/banglalink_screen.dart';
 import '../screen/teletalk_screen.dart';
 
@@ -48,20 +50,31 @@ Widget ButtonDesgin({String name, String image, String onTap}) {
               Row(
                 children: [
                   InkWell(
-                    onTap: () {
-                      if (onTap == 'airtel') {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => AirtelScreen()));
-                      } else if (onTap == 'robi') {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => RobiScreen()));
-                      } else if (onTap == 'banglalink') {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => BanglalinkScreen()));
-                      } else if (onTap == 'teletalk') {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => TeletalkScreen()));
+                    onTap: () async {
+
+                      var connectivityResult = await (Connectivity().checkConnectivity());
+                      if(connectivityResult==ConnectivityResult.none){
+                        Toast.show("No Internet Connection", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
+
+
                       }
+                      else{
+
+                        if (onTap == 'airtel') {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => AirtelScreen()));
+                        } else if (onTap == 'robi') {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => RobiScreen()));
+                        } else if (onTap == 'banglalink') {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => BanglalinkScreen()));
+                        } else if (onTap == 'teletalk') {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => TeletalkScreen()));
+                        }
+                      }
+
                     },
                     child: Container(
                       margin: EdgeInsets.only(left: 12),

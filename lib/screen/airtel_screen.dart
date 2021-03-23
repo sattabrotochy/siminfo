@@ -16,6 +16,9 @@ class AirtelScreen extends StatefulWidget {
 
 class _AirtelScreenState extends State<AirtelScreen>
     with SingleTickerProviderStateMixin {
+
+  bool loading = false;
+
   List<DataModel> airtelUSSDCodeList = [];
   List<DataModel> airtelinternetList = [];
   List<DataModel> airtelminuteList = [];
@@ -103,9 +106,24 @@ class _AirtelScreenState extends State<AirtelScreen>
     );
   }
 
+
+  Future getAirtelList(BuildContext context ) async
+  {
+
+
+
+      MyProvider provider = Provider.of<MyProvider>(context);
+
+      /// ussd
+      await provider.getAirtelUssdCode();
+      airtelUSSDCodeList = await provider.throwairtelUSSDCODE;
+
+  }
+
   @override
   Widget build(BuildContext context) {
     FlutterStatusbarcolor.setStatusBarColor(Colors.red);
+
     MyProvider provider = Provider.of<MyProvider>(context);
 
     /// ussd
@@ -149,21 +167,51 @@ class _AirtelScreenState extends State<AirtelScreen>
         body: TabBarView(
           controller: _tabController,
           children: [
-            airtelUSSDCodeList != null
-                ? ListView.builder(
-                    itemCount: airtelUSSDCodeList.length,
-                    itemBuilder: (context, index) {
-                      return button(
-                        name: airtelUSSDCodeList[index].name,
-                        number: airtelUSSDCodeList[index].number,
-                      );
-                    },
-                  )
-                : Center(
-                    child: CircularProgressIndicator(
-                      backgroundColor: Colors.red,
-                    ),
-                  ),
+
+
+
+            // FutureBuilder(
+            //   future: getAirtelList(context),
+            //   builder: (context, snapshot) {
+            //     if (ConnectionState.active != null && !snapshot.hasData) {
+            //       return Center(child: Text('Loading'));
+            //     }
+            //     if (ConnectionState.done != null && snapshot.hasError) {
+            //       return Center(child: Text(snapshot.error));
+            //     }
+            //     return ListView.builder(
+            //         itemCount: airtelUSSDCodeList.length,
+            //         itemBuilder: (context, index) {
+            //           return button(
+            //             name: airtelUSSDCodeList[index].name,
+            //             number: airtelUSSDCodeList[index].number,
+            //           );
+            //         });
+            //   },
+            //
+            // ),
+
+            FutureBuilder(
+             future: getAirtelList(context),
+              builder: ( _ ,snapshot){
+                switch (snapshot.connectionState) {
+                  case ConnectionState.waiting: return Center(child: CircularProgressIndicator(
+                    color: Colors.black,
+                  ),);
+                  default:
+                    if (snapshot.hasError)
+                      return Text('Error: ${snapshot.error}');
+                    else return ListView.builder(
+                      itemCount: airtelUSSDCodeList.length,
+                      itemBuilder: (context, index) {
+                        return button(
+                          name: airtelUSSDCodeList[index].name,
+                          number: airtelUSSDCodeList[index].number,
+                        );
+                      });
+                }
+              },
+            ),
 
             /// internet airtel
             airtelinternetList != null

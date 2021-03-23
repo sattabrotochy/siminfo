@@ -16,6 +16,7 @@ class BanglalinkScreen extends StatefulWidget {
 
 class _BanglalinkScreenState extends State<BanglalinkScreen>
     with SingleTickerProviderStateMixin {
+  
   List<DataModel> banglalinkUSSdCodeList = [];
   List<DataModel> banglalinkInternetList = [];
   List<DataModel> banglalinkMinuteList = [];

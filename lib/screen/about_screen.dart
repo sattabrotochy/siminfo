@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_share/flutter_share.dart';
+import 'package:share/share.dart';
 import 'package:siminfoall/Widget/button_desgin.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -20,53 +20,53 @@ class _AboutScrennState extends State<AboutScrenn> {
                 children: [
                   Container(
                     child: Image(
-                      image: AssetImage('asset/about_back.png'),
+                      image: AssetImage('asset/drawer_image.png'),
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: 35, left: 15),
-                    child: Text(
-                      'Power by ',
-                      style: TextStyle(
-                        fontSize: 14,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 50, left: 15),
-                    child: Text('Syntaxive.tech',
-                        style: TextStyle(fontSize: 20, color: Colors.green)),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 80, left: 15),
-                    child: Text(
-                      'info@syntaxive.tech',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontStyle: FontStyle.italic),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 100, left: 15),
-                    child: Text(
-                      '+8801763344438',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontStyle: FontStyle.italic),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 120, left: 15),
-                    child: Text(
-                      'www.syntaxive.tech',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontStyle: FontStyle.italic),
-                    ),
-                  ),
+                  // Container(
+                  //   margin: EdgeInsets.only(top: 35, left: 15),
+                  //   child: Text(
+                  //     'Power by ',
+                  //     style: TextStyle(
+                  //       fontSize: 14,
+                  //     ),
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: 20,
+                  // ),
+                  // Container(
+                  //   margin: EdgeInsets.only(top: 50, left: 15),
+                  //   child: Text('Syntaxive.tech',
+                  //       style: TextStyle(fontSize: 20, color: Colors.green)),
+                  // ),
+                  // Container(
+                  //   margin: EdgeInsets.only(top: 80, left: 15),
+                  //   child: Text(
+                  //     'info@syntaxive.tech',
+                  //     style: TextStyle(
+                  //         fontWeight: FontWeight.w400,
+                  //         fontStyle: FontStyle.italic),
+                  //   ),
+                  // ),
+                  // Container(
+                  //   margin: EdgeInsets.only(top: 100, left: 15),
+                  //   child: Text(
+                  //     '+8801763344438',
+                  //     style: TextStyle(
+                  //         fontWeight: FontWeight.w400,
+                  //         fontStyle: FontStyle.italic),
+                  //   ),
+                  // ),
+                  // Container(
+                  //   margin: EdgeInsets.only(top: 120, left: 15),
+                  //   child: Text(
+                  //     'www.syntaxive.tech',
+                  //     style: TextStyle(
+                  //         fontWeight: FontWeight.w400,
+                  //         fontStyle: FontStyle.italic),
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -74,9 +74,12 @@ class _AboutScrennState extends State<AboutScrenn> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: InkWell(
-                onTap: _launchURL,
+                onTap: () {
+                  String url = "";
+                  _launchURL(url);
+                },
                 child: Container(
-                    height: 70,
+                    height: 60,
                     width: double.infinity,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.0),
@@ -110,11 +113,11 @@ class _AboutScrennState extends State<AboutScrenn> {
               padding: const EdgeInsets.all(8.0),
               child: InkWell(
                 onTap: () {
-                  sharedata("Sim Info",
-                      "https://www.youtube.com/results?search_query=+share+system+use+in+flutter");
+                  Share.share("Hi, try downloading this amazing app from " +
+                      "https://play.google.com/store/apps/details?id=com.syntaxive.qrcodescannertech");
                 },
                 child: Container(
-                    height: 70,
+                    height: 60,
                     width: double.infinity,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.0),
@@ -147,9 +150,13 @@ class _AboutScrennState extends State<AboutScrenn> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  String url =
+                      "http://shiftlog.tech/syntaxive-privacy-policy/all-sim-info/";
+                  _launchURL(url);
+                },
                 child: Container(
-                    height: 70,
+                    height: 60,
                     width: double.infinity,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.0),
@@ -184,15 +191,10 @@ class _AboutScrennState extends State<AboutScrenn> {
   }
 }
 
-Future sharedata(String s, String t) async {
-  await FlutterShare.share(
-    title: s,
-    linkUrl: t,
-  );
-}
 
-_launchURL() async {
-  const url = 'https://flutter.io';
+
+
+_launchURL(String url) async {
   if (await canLaunch(url)) {
     await launch(url);
   } else {

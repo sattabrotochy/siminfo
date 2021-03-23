@@ -6,14 +6,20 @@ import 'package:siminfoall/Model/Data_Model.dart';
 
 
 
+
 class MyProvider extends ChangeNotifier{
 
 /// gp all data get
 
+
+
+
+  BuildContext context;
   List<DataModel> gpUSSDcodeList=[];
   DataModel _dataModel1;
   Future getGpUssdCode() async
   {
+
     List<DataModel> newgpUSSDcodeList=[];
     QuerySnapshot querySnapshot =
     await FirebaseFirestore.instance.collection('Gp').doc('rDDWywna6gZBW6QsRNwA').collection('USSDCODE').get();
